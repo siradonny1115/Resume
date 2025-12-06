@@ -15,15 +15,6 @@ const Tag = styled.span`
   font-size: 14px;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.primary};
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.highlight};
-    border-color: ${({ theme }) => theme.colors.highlight};
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: ${({ theme }) => theme.shadows.small};
-  }
 `;
 
 interface SkillsProps {

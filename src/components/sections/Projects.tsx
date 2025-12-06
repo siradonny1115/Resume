@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import { MainProject, OtherProject } from '../../types/resume';
 
 const ProjectsWrapper = styled.div`
@@ -16,6 +17,7 @@ const ProjectItem = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.large};
   border: 1px solid ${({ theme }) => theme.colors.border};
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.medium};
@@ -161,14 +163,21 @@ interface ProjectsProps {
 }
 
 export const Projects = ({ mainProjects, otherProjects }: ProjectsProps) => {
+  const navigate = useNavigate();
+
   return (
     <ProjectsWrapper>
       {mainProjects.map((project, index) => (
-        <ProjectItem key={index}>
+        <ProjectItem key={index} onClick={() => navigate(`/projects/${index}`)}>
           <ProjectHeader>
             <ProjectPeriod>{project.period}</ProjectPeriod>
             {project.link && (
-              <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer">
+              <ProjectLink
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
                 🔗 프로젝트 링크
               </ProjectLink>
             )}

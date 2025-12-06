@@ -40,11 +40,12 @@ const SectionContent = styled.div`
 interface SectionProps {
   title: string;
   children: ReactNode;
+  id?: string;
 }
 
-export const Section = ({ title, children }: SectionProps) => {
+export const Section = ({ title, children, id }: SectionProps) => {
   return (
-    <SectionLayout>
+    <SectionLayout id={id}>
       <SectionTitle>{title}</SectionTitle>
       <SectionContent>{children}</SectionContent>
     </SectionLayout>
