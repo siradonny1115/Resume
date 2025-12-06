@@ -1,3 +1,27 @@
-*.md
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+*.local
+
+# Editor
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+
+# Claude
 *.claude
+
+# Docs (except README)
+*.md
 !README.md
