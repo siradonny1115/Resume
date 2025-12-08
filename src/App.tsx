@@ -8,6 +8,7 @@ import { ScrollToTop } from './components/common/ScrollToTop';
 import { HomePage } from './pages/HomePage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ProjectDetailPage } from './pages/ProjectDetailPage';
+import { PDFResumePage } from './pages/PDFResumePage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:id" element={<ProjectDetailPage />} />
+          <Route path="/pdf" element={<PDFResumePage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

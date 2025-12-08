@@ -90,10 +90,8 @@ export const GNB = () => {
           <NavItem isActive={location.pathname.startsWith('/projects')}>
             <Link to="/projects">Projects</Link>
           </NavItem>
-          <NavItem>
-            <a href="#" onClick={(e) => e.preventDefault()}>
-              Blog
-            </a>
+          <NavItem isActive={location.pathname === '/pdf'}>
+            <Link to="/pdf">PDF Resume</Link>
           </NavItem>
         </NavMenu>
       </NavContainer>
