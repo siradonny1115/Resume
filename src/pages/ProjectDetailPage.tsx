@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 import { Container } from '../components/layout/Container';
 import { resumeData } from '../data/resume';
 
@@ -129,14 +132,145 @@ const Highlight = styled.span`
   font-size: 18px;
 `;
 
+const ImageGallery = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const ProjectImage = styled.img`
+  width: 100%;
+  border-radius: ${({ theme }) => theme.borderRadius.large};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: ${({ theme }) => theme.shadows.large};
+  }
+`;
+
+const ImageCaption = styled.p`
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.tertiary};
+  margin-top: 8px;
+  text-align: center;
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TroubleShootingList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const TroubleShootingItem = styled.div`
+  padding: 24px;
+  background-color: ${({ theme }) => theme.colors.background};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.large};
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const TroubleLabel = styled.div<{ type: 'problem' | 'solution' | 'result' }>`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.7;
+`;
+
+const TroubleLabelText = styled.span<{ type: 'problem' | 'solution' | 'result' }>`
+  font-size: 15px;
+  color: ${({ theme, type }) =>
+    type === 'problem'
+      ? theme.colors.secondary
+      : type === 'solution'
+        ? theme.colors.primary
+        : theme.colors.highlight};
+  font-weight: ${({ type }) => (type === 'result' ? '600' : '500')};
+`;
+
+const LearningList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const LearningItem = styled.li`
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.secondary};
+  padding-left: 28px;
+  position: relative;
+  line-height: 1.7;
+
+  &::before {
+    content: '📚';
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+  }
+`;
+
+// 프로젝트별 이미지 데이터
+const projectImages: Record<number, Array<{ src: string; caption: string }>> = {
+  0: [
+    // 요금제 A/B 테스트
+    {
+      src: '/images/projects/pricing-ab-test/price-page.png',
+      caption: '요금제 페이지 개편',
+    },
+    {
+      src: '/images/projects/pricing-ab-test/theme-page.png',
+      caption: '템플릿 페이지 개편 (Before)',
+    },
+    {
+      src: '/images/projects/pricing-ab-test/theme-page-2.png',
+      caption: '템플릿 페이지 개편 (After)',
+    },
+    {
+      src: '/images/projects/pricing-ab-test/payment-page.png',
+      caption: '결제 등록 흐름',
+    },
+    {
+      src: '/images/projects/pricing-ab-test/credit-page.png',
+      caption: '정기 결제 해지 방어 모달',
+    },
+    {
+      src: '/images/projects/pricing-ab-test/credit-page-2.png',
+      caption: '첫 결제 고객 프로모션',
+    },
+  ],
+};
+
 export const ProjectDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const projectIndex = Number(id);
-  const project = resumeData.mainProjects[projectIndex];
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  // mainProjects와 otherProjects를 합쳐서 하나의 배열로 만듦
+  const allProjects = [...resumeData.mainProjects, ...resumeData.otherProjects];
+  const project = allProjects[projectIndex];
 
   if (!project || isNaN(projectIndex)) {
     return <Navigate to="/projects" replace />;
   }
+
+  // Lightbox에 사용할 이미지 배열 생성
+  const images = projectImages[projectIndex]?.map((img) => ({ src: img.src })) || [];
 
   return (
     <Container>
@@ -180,6 +314,67 @@ export const ProjectDetailPage = () => {
           ))}
         </ResultList>
       </Section>
+
+      {project.troubleShooting && project.troubleShooting.length > 0 && (
+        <Section>
+          <SectionTitle>주요 해결 과제</SectionTitle>
+          <TroubleShootingList>
+            {project.troubleShooting.map((item, index) => (
+              <TroubleShootingItem key={index}>
+                <TroubleLabel type="problem">
+                  <TroubleLabelText type="problem">{item.problem}</TroubleLabelText>
+                </TroubleLabel>
+                <TroubleLabel type="solution">
+                  <TroubleLabelText type="solution">{item.solution}</TroubleLabelText>
+                </TroubleLabel>
+                <TroubleLabel type="result">
+                  <TroubleLabelText type="result">{item.result}</TroubleLabelText>
+                </TroubleLabel>
+              </TroubleShootingItem>
+            ))}
+          </TroubleShootingList>
+        </Section>
+      )}
+
+      {project.learnings && project.learnings.length > 0 && (
+        <Section>
+          <SectionTitle>핵심 학습 내용</SectionTitle>
+          <LearningList>
+            {project.learnings.map((learning, index) => (
+              <LearningItem key={index}>{learning}</LearningItem>
+            ))}
+          </LearningList>
+        </Section>
+      )}
+
+      {projectImages[projectIndex] && (
+        <Section>
+          <SectionTitle>프로젝트 스크린샷</SectionTitle>
+          <ImageGallery>
+            {projectImages[projectIndex].map((image, index) => (
+              <ImageWrapper key={index}>
+                <ProjectImage
+                  src={image.src}
+                  alt={image.caption}
+                  loading="lazy"
+                  onClick={() => {
+                    setPhotoIndex(index);
+                    setLightboxOpen(true);
+                  }}
+                />
+                <ImageCaption>{image.caption}</ImageCaption>
+              </ImageWrapper>
+            ))}
+          </ImageGallery>
+        </Section>
+      )}
+
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={images}
+        index={photoIndex}
+      />
     </Container>
   );
 };

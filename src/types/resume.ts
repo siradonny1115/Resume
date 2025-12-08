@@ -29,20 +29,34 @@ export interface ProjectResult {
   value?: string;
 }
 
+export interface TroubleShooting {
+  problem: string;
+  solution: string;
+  result: string;
+}
+
 export interface MainProject {
+  name: string;
   company: string;
   period: string;
   description: string;
   tasks: string[];
   results: ProjectResult[];
+  troubleShooting?: TroubleShooting[];
+  learnings?: string[];
   link?: string;
 }
 
 export interface OtherProject {
   name: string;
+  company: string;
   period: string;
-  description?: string;
-  highlight?: string;
+  description: string;
+  tasks: string[];
+  results: ProjectResult[];
+  troubleShooting?: TroubleShooting[];
+  learnings?: string[];
+  link?: string;
 }
 
 export interface Contribution {

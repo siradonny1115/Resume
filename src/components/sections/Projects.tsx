@@ -31,6 +31,13 @@ const ProjectHeader = styled.div`
   gap: 6px;
 `;
 
+const ProjectName = styled.h3`
+  font-size: 17px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.primary};
+  margin: 0;
+`;
+
 const ProjectPeriod = styled.p`
   font-size: 13px;
   color: ${({ theme }) => theme.colors.tertiary};
@@ -170,6 +177,7 @@ export const Projects = ({ mainProjects, otherProjects }: ProjectsProps) => {
       {mainProjects.map((project, index) => (
         <ProjectItem key={index} onClick={() => navigate(`/projects/${index}`)}>
           <ProjectHeader>
+            <ProjectName>{project.name}</ProjectName>
             <ProjectPeriod>{project.period}</ProjectPeriod>
             {project.link && (
               <ProjectLink
@@ -204,16 +212,15 @@ export const Projects = ({ mainProjects, otherProjects }: ProjectsProps) => {
 
       <OtherProjectsWrapper>
         {otherProjects.map((project, index) => (
-          <OtherProjectItem key={index}>
+          <OtherProjectItem
+            key={index}
+            onClick={() => navigate(`/projects/${mainProjects.length + index}`)}
+            style={{ cursor: 'pointer' }}
+          >
             <OtherProjectName>{project.name}</OtherProjectName>
             <OtherProjectPeriod>{project.period}</OtherProjectPeriod>
             {project.description && (
               <OtherProjectDescription>{project.description}</OtherProjectDescription>
-            )}
-            {project.highlight && (
-              <OtherProjectDescription>
-                <Highlight>{project.highlight}</Highlight>
-              </OtherProjectDescription>
             )}
           </OtherProjectItem>
         ))}

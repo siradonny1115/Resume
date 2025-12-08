@@ -25,3 +25,6 @@ Thumbs.db
 # Docs (except README)
 *.md
 !README.md
+.vercel
+scripts
+notion-data
