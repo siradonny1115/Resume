@@ -10,11 +10,12 @@ import { PersonalProjects } from '../components/sections/PersonalProjects';
 import { Education } from '../components/sections/Education';
 import { Certificates } from '../components/sections/Certificates';
 import { LNB } from '../components/common/LNB';
+import { PageTransition } from '../components/common/PageTransition';
 import { resumeData } from '../data/resume';
 
 export const HomePage = () => {
   return (
-    <>
+    <PageTransition>
       <LNB />
       <Container>
         <Header data={resumeData.basicInfo} />
@@ -57,6 +58,6 @@ export const HomePage = () => {
           <Certificates data={resumeData.certificates} />
         </Section>
       </Container>
-    </>
+    </PageTransition>
   );
 };

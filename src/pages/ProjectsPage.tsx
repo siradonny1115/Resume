@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { Container } from '../components/layout/Container';
+import { PageTransition } from '../components/common/PageTransition';
 import { resumeData } from '../data/resume';
 
 const PageTitle = styled.h1`
@@ -86,23 +87,25 @@ const Tag = styled.span`
 
 export const ProjectsPage = () => {
   return (
-    <Container>
-      <PageTitle>Projects</PageTitle>
-      <ProjectGrid>
-        {resumeData.mainProjects.map((project, index) => (
-          <ProjectCard key={index} to={`/projects/${index}`}>
-            <ProjectPeriod>{project.period}</ProjectPeriod>
-            <ProjectTitle>
-              {project.description.split('.')[0] || '프로젝트'}
-            </ProjectTitle>
-            <ProjectDescription>{project.description}</ProjectDescription>
-            <ProjectMeta>
-              <Tag>{project.company}</Tag>
-              <Tag>{project.tasks.length}개 주요 작업</Tag>
-            </ProjectMeta>
-          </ProjectCard>
-        ))}
-      </ProjectGrid>
-    </Container>
+    <PageTransition>
+      <Container>
+        <PageTitle>Projects</PageTitle>
+        <ProjectGrid>
+          {resumeData.mainProjects.map((project, index) => (
+            <ProjectCard key={index} to={`/projects/${index}`}>
+              <ProjectPeriod>{project.period}</ProjectPeriod>
+              <ProjectTitle>
+                {project.description.split('.')[0] || '프로젝트'}
+              </ProjectTitle>
+              <ProjectDescription>{project.description}</ProjectDescription>
+              <ProjectMeta>
+                <Tag>{project.company}</Tag>
+                <Tag>{project.tasks.length}개 주요 작업</Tag>
+              </ProjectMeta>
+            </ProjectCard>
+          ))}
+        </ProjectGrid>
+      </Container>
+    </PageTransition>
   );
 };

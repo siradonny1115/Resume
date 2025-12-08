@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { Container } from '../components/layout/Container';
+import { PageTransition } from '../components/common/PageTransition';
 import { resumeData } from '../data/resume';
 
 const BackLink = styled(Link)`
@@ -273,8 +274,9 @@ export const ProjectDetailPage = () => {
   const images = projectImages[projectIndex]?.map((img) => ({ src: img.src })) || [];
 
   return (
-    <Container>
-      <BackLink to="/projects">← 프로젝트 목록으로</BackLink>
+    <PageTransition>
+      <Container>
+        <BackLink to="/projects">← 프로젝트 목록으로</BackLink>
 
       <ProjectHeader>
         <ProjectMeta>
@@ -376,5 +378,6 @@ export const ProjectDetailPage = () => {
         index={photoIndex}
       />
     </Container>
+    </PageTransition>
   );
 };
