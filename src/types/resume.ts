@@ -100,7 +100,7 @@ export interface ResumeData {
   otherProjects: OtherProject[];
   contributions: string[];
   personalProjects: PersonalProject[];
-  educationHistory: Education;
-  educationCourse: Education;
-  certificates: Certificate[];
+  educationHistory?: Education;
+  educationCourse?: Education;
+  certificates?: Certificate[];
 }

@@ -7,7 +7,6 @@ import { Career } from '../components/sections/Career';
 import { Projects } from '../components/sections/Projects';
 import { Contributions } from '../components/sections/Contributions';
 import { PersonalProjects } from '../components/sections/PersonalProjects';
-import { Education } from '../components/sections/Education';
 import { Certificates } from '../components/sections/Certificates';
 import { LNB } from '../components/common/LNB';
 import { PageTransition } from '../components/common/PageTransition';
@@ -47,12 +46,12 @@ export const HomePage = () => {
           <PersonalProjects data={resumeData.personalProjects} />
         </Section>
 
-        <Section title="학력 · 교육" id="education">
+        {/* <Section title="학력 · 교육" id="education">
           <Education
             history={resumeData.educationHistory}
             course={resumeData.educationCourse}
           />
-        </Section>
+        </Section> */}
 
         <Section title="자격증" id="certificates">
           <Certificates data={resumeData.certificates} />

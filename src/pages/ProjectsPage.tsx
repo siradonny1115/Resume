@@ -100,7 +100,6 @@ export const ProjectsPage = () => {
               <ProjectDescription>{project.description}</ProjectDescription>
               <ProjectMeta>
                 <Tag>{project.company}</Tag>
-                <Tag>{project.tasks.length}개 주요 작업</Tag>
               </ProjectMeta>
             </ProjectCard>
           ))}

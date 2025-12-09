@@ -25,10 +25,13 @@ const CertificateIssuer = styled.p`
 `;
 
 interface CertificatesProps {
-  data: Certificate[];
+  data?: Certificate[];
 }
 
 export const Certificates = ({ data }: CertificatesProps) => {
+  if (data === undefined) {
+    return null
+  }
   return (
     <CertificateList>
       {data.map((cert, index) => (

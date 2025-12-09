@@ -38,21 +38,22 @@ export const expertPlatformProject: MainProject = {
       caption: '포트폴리오 상세 페이지',
     },
     {
-      src: '/images/projects/expert-service/expert-signup-step1.png',
-      caption: '전문가 회원가입 - React-hook-form + Zod 유효성 검사',
-    },
-    {
       src: '/images/projects/expert-service/portfolio-create.png',
       caption: '포트폴리오 등록 (Admin)',
+    },
+    {
+      src: '/images/projects/expert-service/expert-signup-email-verification.png',
+      caption: '이메일 인증 플로우',
     },
     {
       src: '/images/projects/expert-service/expert-profile-edit.png',
       caption: '전문가 프로필 관리 (Admin)',
     },
     {
-      src: '/images/projects/expert-service/expert-signup-email-verification.png',
-      caption: '이메일 인증 플로우',
+      src: '/images/projects/expert-service/expert-signup-step1.png',
+      caption: '전문가 회원가입 - React-hook-form + Zod 유효성 검사',
     },
+
   ],
   learnings: [
     'React-hook-form과 Zod를 활용한 복잡한 폼 유효성 검사',

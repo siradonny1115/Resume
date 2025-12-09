@@ -85,7 +85,7 @@ export const GNB = () => {
   return (
     <Nav>
       <NavContainer>
-        <Logo to="/">김상돈</Logo>
+        <Logo to="/">Frontend Developer</Logo>
         <NavMenu>
           <NavItem isActive={location.pathname === '/'}>
             <Link to="/">Home</Link>

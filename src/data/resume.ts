@@ -7,7 +7,7 @@ import { mainProjects } from './mainProjects';
 import { otherProjects } from './otherProjects';
 import { contributions } from './contributions';
 import { personalProjects } from './personalProjects';
-import { educationHistory, educationCourse, certificates } from './education';
+import { educationCourse, certificates } from './education';
 
 export const resumeData: ResumeData = {
   basicInfo,
@@ -18,7 +18,8 @@ export const resumeData: ResumeData = {
   otherProjects,
   contributions,
   personalProjects,
-  educationHistory,
+  // 학력·교육 섹션 숨김 처리 (필요시 주석 해제)
+  // educationHistory,
   educationCourse,
   certificates,
 };
