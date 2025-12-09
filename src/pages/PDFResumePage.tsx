@@ -421,35 +421,39 @@ export const PDFResumePage = () => {
             ))}
           </Section>
 
-          <Section>
-            <SectionTitle>학력 · 교육</SectionTitle>
-            <CareerItem>
-              <CareerHeader>
-                <CompanyName>{resumeData.educationHistory.school}</CompanyName>
-                <Period>{resumeData.educationHistory.status}</Period>
-              </CareerHeader>
-              <Position>{resumeData.educationHistory.major}</Position>
-            </CareerItem>
-            <CareerItem>
-              <CareerHeader>
-                <CompanyName>{resumeData.educationCourse.name}</CompanyName>
-                <Period>{resumeData.educationCourse.period}</Period>
-              </CareerHeader>
-              <Position>{resumeData.educationCourse.status}</Position>
-            </CareerItem>
-          </Section>
-
-          <Section>
-            <SectionTitle>자격증</SectionTitle>
-            {resumeData.certificates.map((cert, index) => (
-              <CareerItem key={index}>
+          {resumeData.educationHistory && resumeData.educationCourse && (
+            <Section>
+              <SectionTitle>학력 · 교육</SectionTitle>
+              <CareerItem>
                 <CareerHeader>
-                  <CompanyName>{cert.name}</CompanyName>
-                  <Period>{cert.issuer}</Period>
+                  <CompanyName>{resumeData.educationHistory.school}</CompanyName>
+                  <Period>{resumeData.educationHistory.status}</Period>
                 </CareerHeader>
+                <Position>{resumeData.educationHistory.major}</Position>
               </CareerItem>
-            ))}
-          </Section>
+              <CareerItem>
+                <CareerHeader>
+                  <CompanyName>{resumeData.educationCourse.name}</CompanyName>
+                  <Period>{resumeData.educationCourse.period}</Period>
+                </CareerHeader>
+                <Position>{resumeData.educationCourse.status}</Position>
+              </CareerItem>
+            </Section>
+          )}
+
+          {resumeData.certificates && resumeData.certificates.length > 0 && (
+            <Section>
+              <SectionTitle>자격증</SectionTitle>
+              {resumeData.certificates.map((cert, index) => (
+                <CareerItem key={index}>
+                  <CareerHeader>
+                    <CompanyName>{cert.name}</CompanyName>
+                    <Period>{cert.issuer}</Period>
+                  </CareerHeader>
+                </CareerItem>
+              ))}
+            </Section>
+          )}
         </PDFPage>
       </PDFContainer>
     </>
