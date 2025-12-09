@@ -187,20 +187,37 @@ const TroubleShootingItem = styled.div`
 
 const TroubleLabel = styled.div<{ type: 'problem' | 'solution' | 'result' }>`
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
   line-height: 1.7;
+`;
+
+const TroubleLabelHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const TroubleLabelEmoji = styled.span`
+  font-size: 20px;
+`;
+
+const TroubleLabelTitle = styled.span<{ type: 'problem' | 'solution' | 'result' }>`
+  font-size: 17px;
+  font-weight: 700;
+  color: ${({ theme, type }) =>
+    type === 'problem'
+      ? theme.colors.primary
+      : type === 'solution'
+        ? theme.colors.primary
+        : theme.colors.primary};
 `;
 
 const TroubleLabelText = styled.span<{ type: 'problem' | 'solution' | 'result' }>`
   font-size: 15px;
-  color: ${({ theme, type }) =>
-    type === 'problem'
-      ? theme.colors.secondary
-      : type === 'solution'
-        ? theme.colors.primary
-        : theme.colors.highlight};
-  font-weight: ${({ type }) => (type === 'result' ? '600' : '500')};
+  color: ${({ theme }) => theme.colors.secondary};
+  line-height: 1.8;
+  white-space: pre-line;
 `;
 
 const LearningList = styled.ul`
@@ -293,12 +310,24 @@ export const ProjectDetailPage = () => {
             {project.troubleShooting.map((item, index) => (
               <TroubleShootingItem key={index}>
                 <TroubleLabel type="problem">
+                  <TroubleLabelHeader>
+                    <TroubleLabelEmoji>❗</TroubleLabelEmoji>
+                    <TroubleLabelTitle type="problem">문제 배경</TroubleLabelTitle>
+                  </TroubleLabelHeader>
                   <TroubleLabelText type="problem">{item.problem}</TroubleLabelText>
                 </TroubleLabel>
                 <TroubleLabel type="solution">
+                  <TroubleLabelHeader>
+                    <TroubleLabelEmoji>🔧</TroubleLabelEmoji>
+                    <TroubleLabelTitle type="solution">해결 방법</TroubleLabelTitle>
+                  </TroubleLabelHeader>
                   <TroubleLabelText type="solution">{item.solution}</TroubleLabelText>
                 </TroubleLabel>
                 <TroubleLabel type="result">
+                  <TroubleLabelHeader>
+                    <TroubleLabelEmoji>👍</TroubleLabelEmoji>
+                    <TroubleLabelTitle type="result">결과</TroubleLabelTitle>
+                  </TroubleLabelHeader>
                   <TroubleLabelText type="result">{item.result}</TroubleLabelText>
                 </TroubleLabel>
               </TroubleShootingItem>

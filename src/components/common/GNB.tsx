@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 const Nav = styled.nav`
   position: fixed;
@@ -51,7 +51,7 @@ const NavItem = styled.li<{ isActive?: boolean }>`
     font-size: 15px;
     font-weight: 500;
     color: ${({ theme, isActive }) =>
-      isActive ? theme.colors.highlight : theme.colors.secondary};
+    isActive ? theme.colors.highlight : theme.colors.secondary};
     text-decoration: none;
     transition: color 0.2s;
     position: relative;
@@ -61,8 +61,8 @@ const NavItem = styled.li<{ isActive?: boolean }>`
     }
 
     ${({ isActive, theme }) =>
-      isActive &&
-      `
+    isActive &&
+    `
       &::after {
         content: '';
         position: absolute;
@@ -78,7 +78,10 @@ const NavItem = styled.li<{ isActive?: boolean }>`
 
 export const GNB = () => {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
 
+  // showpdf 파라미터 존재 여부 체크 (/?showpdf 형태로 사용)
+  const isShowPdf = searchParams.has('showpdf');
   return (
     <Nav>
       <NavContainer>
@@ -90,9 +93,11 @@ export const GNB = () => {
           <NavItem isActive={location.pathname.startsWith('/projects')}>
             <Link to="/projects">Projects</Link>
           </NavItem>
-          <NavItem isActive={location.pathname === '/pdf'}>
-            <Link to="/pdf">PDF Resume</Link>
-          </NavItem>
+          {isShowPdf && (
+            <NavItem isActive={location.pathname === '/pdf-resume'}>
+              <Link to="/pdf-resume?token=resume-access-2025">PDF Resume</Link>
+            </NavItem>
+          )}
         </NavMenu>
       </NavContainer>
     </Nav>
