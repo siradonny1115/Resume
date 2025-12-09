@@ -38,6 +38,7 @@ export interface TroubleShooting {
 export interface ProjectImage {
   src: string;
   caption: string;
+  link?: string;
 }
 
 export interface MainProject {

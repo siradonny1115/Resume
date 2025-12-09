@@ -22,14 +22,17 @@ export const abTestProject: MainProject = {
     {
       src: '/images/projects/pricing-ab-test/price-page.png',
       caption: '요금제 페이지 개편',
+      link: 'https://imweb.me/price',
     },
     {
       src: '/images/projects/pricing-ab-test/theme-page.png',
       caption: '템플릿 페이지 개편 (Before)',
+      link: 'https://imweb.me/theme',
     },
     {
       src: '/images/projects/pricing-ab-test/theme-page-2.png',
       caption: '템플릿 페이지 개편 (After)',
+      link: 'https://imweb.me/theme',
     },
     {
       src: '/images/projects/pricing-ab-test/payment-page.png',
@@ -68,4 +71,5 @@ export const abTestProject: MainProject = {
     '기획 변경에 유연하게 대응할 수 있는 확장 가능한 구조 설계',
     'React 프레임워크를 활용한 모던 프론트엔드 개발 경험',
   ],
+  link: 'https://imweb.me/price',
 };
