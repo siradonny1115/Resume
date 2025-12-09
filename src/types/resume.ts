@@ -35,6 +35,11 @@ export interface TroubleShooting {
   result: string;
 }
 
+export interface ProjectImage {
+  src: string;
+  caption: string;
+}
+
 export interface MainProject {
   name: string;
   company: string;
@@ -45,6 +50,7 @@ export interface MainProject {
   troubleShooting?: TroubleShooting[];
   learnings?: string[];
   link?: string;
+  images?: ProjectImage[];
 }
 
 export interface OtherProject {
@@ -57,6 +63,7 @@ export interface OtherProject {
   troubleShooting?: TroubleShooting[];
   learnings?: string[];
   link?: string;
+  images?: ProjectImage[];
 }
 
 export interface Contribution {
