@@ -12,6 +12,5 @@ export const career: Career = {
     'CRM 시스템 개발: 알림톡 캠페인 자동화, 쿠폰 관리 시스템 MFE 전환',
     '결제 시스템 개발: PG 연동(토스페이, 카카오페이, 나이스페이 등), 정기결제, 간편결제 기능 구현',
     '레거시 전환: PHP/jQuery 기반 시스템을 React/Next.js로 마이그레이션',
-    'E2E 테스트 환경 구축: Cypress + Sorry-Cypress 기반 병렬 테스트 환경 자체 호스팅',
   ],
 };
