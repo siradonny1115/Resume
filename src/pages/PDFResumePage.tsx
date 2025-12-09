@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { Global } from '@emotion/react';
 import { pdfPageStyles } from '../styles/pdfStyles';
 import { resumeData } from '../data/resume';
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const PDFContainer = styled.div`
   max-width: 1200px;
@@ -257,7 +259,23 @@ const ResultItem = styled.div`
   }
 `;
 
+// 보안 토큰 (환경변수로 관리 권장)
+const RESUME_ACCESS_TOKEN = 'resume-access-2025';
+
 export const PDFResumePage = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // 접근 권한 체크
+  useEffect(() => {
+    const token = searchParams.get('token');
+
+    if (token !== RESUME_ACCESS_TOKEN) {
+      // 토큰이 없거나 잘못된 경우 홈으로 리다이렉트
+      navigate('/', { replace: true });
+    }
+  }, [searchParams, navigate]);
+
   const handlePrint = () => {
     window.print();
   };
