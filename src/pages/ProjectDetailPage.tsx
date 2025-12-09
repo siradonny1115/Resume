@@ -225,37 +225,6 @@ const LearningItem = styled.li`
   }
 `;
 
-// 프로젝트별 이미지 데이터
-const projectImages: Record<number, Array<{ src: string; caption: string }>> = {
-  0: [
-    // 요금제 A/B 테스트
-    {
-      src: '/images/projects/pricing-ab-test/price-page.png',
-      caption: '요금제 페이지 개편',
-    },
-    {
-      src: '/images/projects/pricing-ab-test/theme-page.png',
-      caption: '템플릿 페이지 개편 (Before)',
-    },
-    {
-      src: '/images/projects/pricing-ab-test/theme-page-2.png',
-      caption: '템플릿 페이지 개편 (After)',
-    },
-    {
-      src: '/images/projects/pricing-ab-test/payment-page.png',
-      caption: '결제 등록 흐름',
-    },
-    {
-      src: '/images/projects/pricing-ab-test/credit-page.png',
-      caption: '정기 결제 해지 방어 모달',
-    },
-    {
-      src: '/images/projects/pricing-ab-test/credit-page-2.png',
-      caption: '첫 결제 고객 프로모션',
-    },
-  ],
-};
-
 export const ProjectDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const projectIndex = Number(id);
@@ -271,7 +240,7 @@ export const ProjectDetailPage = () => {
   }
 
   // Lightbox에 사용할 이미지 배열 생성
-  const images = projectImages[projectIndex]?.map((img) => ({ src: img.src })) || [];
+  const images = project.images?.map((img) => ({ src: img.src })) || [];
 
   return (
     <PageTransition>
@@ -349,11 +318,11 @@ export const ProjectDetailPage = () => {
         </Section>
       )}
 
-      {projectImages[projectIndex] && (
+      {project.images && project.images.length > 0 && (
         <Section>
           <SectionTitle>프로젝트 스크린샷</SectionTitle>
           <ImageGallery>
-            {projectImages[projectIndex].map((image, index) => (
+            {project.images.map((image, index) => (
               <ImageWrapper key={index}>
                 <ProjectImage
                   src={image.src}
