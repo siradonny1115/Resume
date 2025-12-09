@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import { MainProject, OtherProject } from '../../types/resume';
+import { Flex } from '../common/Flex';
 
 const ProjectsWrapper = styled.div`
   display: flex;
@@ -177,8 +178,10 @@ export const Projects = ({ mainProjects, otherProjects }: ProjectsProps) => {
       {mainProjects.map((project, index) => (
         <ProjectItem key={index} onClick={() => navigate(`/projects/${index}`)}>
           <ProjectHeader>
-            <ProjectName>{project.name}</ProjectName>
-            <ProjectPeriod>{project.period}</ProjectPeriod>
+            <Flex css={{ alignItems: 'flex-end', gap: '12px' }}>
+              <ProjectName>{project.name}</ProjectName>
+              <ProjectPeriod>{project.period}</ProjectPeriod>
+            </Flex>
             {project.link && (
               <ProjectLink
                 href={project.link}
